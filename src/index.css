@@ -1,0 +1,26 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  background-color: rgb(249,221,239);
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+/* Added CSS */
+h1 {
+  font-family: 'BebasNeue', sans-serif;
+  font-size: 3rem;
+}
+
+@font-face {
+  font-family: 'BebasNeue';
+  src: local('BebasNeue'), url(./fonts/BebasNeue-Regular.ttf) format('truetype');
+}
