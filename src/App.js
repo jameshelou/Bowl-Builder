@@ -5,13 +5,13 @@ import BowlBuilder from './containers/BowlBuilder/BowlBuilder';
 
 class App extends Component {
   render() {
-    return (
-      <div>
-        <Layout>
-          <BowlBuilder/>
-        </Layout>
-      </div>
-    );
+  return (
+    <div>
+    <Layout>
+      <BowlBuilder/>
+    </Layout>
+    </div>
+  );
   }
 }
 
