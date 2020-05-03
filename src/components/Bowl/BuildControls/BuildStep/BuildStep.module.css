@@ -1,0 +1,10 @@
+.BuildStep {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+.BuildStep h3 {
+  margin: 8px;
+  font-size: 2rem;
+}

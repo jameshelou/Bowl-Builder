@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import Aux from '../../hoc/Aux';
 import Bowl from '../../components/Bowl/Bowl';
 import BuildControls from '../../components/Bowl/BuildControls/BuildControls';
@@ -8,12 +7,7 @@ import OrderSummary from '../../components/Bowl/OrderSummary/OrderSummary';
 import axios from '../../axios-order';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
-
-const INGREDIENT_PRICES = {
-  brownRiceAndCabbage: 10,
-  brownRice: 11,
-  sushiRice: 12
-};
+import { INGREDIENT_PRICES } from '../../utilities/constants';
 
 class BowlBuilder extends Component {
   state = {
@@ -44,14 +38,19 @@ class BowlBuilder extends Component {
     this.setState({ purchasable: false });
   }
 
-  addIngredientHandler = ingredient => {
+  toggleIngredientHandler = ingredient => {
     const updatedIngredients = {
       ...this.state.ingredients
     }
-    updatedIngredients[ingredient] = updatedIngredients[ingredient] + 1;
+    
+    if (updatedIngredients[ingredient] > 0) {
+      this.removeIngredientHandler(ingredient)
+    } else {
+      updatedIngredients[ingredient] = updatedIngredients[ingredient] + 1;
 
-    const updatedPrice = this.state.totalPrice + INGREDIENT_PRICES[ingredient];
-    this.setState({ ingredients: updatedIngredients, totalPrice: updatedPrice}, () => this.updatePurchasable());
+      const updatedPrice = this.state.totalPrice + INGREDIENT_PRICES[ingredient];
+      this.setState({ ingredients: updatedIngredients, totalPrice: updatedPrice}, () => this.updatePurchasable());
+    }
   }
 
   removeIngredientHandler = ingredient => {
@@ -114,8 +113,7 @@ class BowlBuilder extends Component {
           <Bowl ingredients={this.state.ingredients} />
 
           <BuildControls
-            addIngredient={this.addIngredientHandler}
-            removeIngredient={this.removeIngredientHandler}
+            toggleIngredient={this.toggleIngredientHandler}
             disabledInfo={disabledInfo}
             totalPrice={this.state.totalPrice}
             purchasable={this.state.purchasable}

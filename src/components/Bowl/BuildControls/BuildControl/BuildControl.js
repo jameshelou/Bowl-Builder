@@ -1,17 +1,11 @@
 import React from 'react';
-
+import { Checkbox } from '@material-ui/core';
 import styles from './BuildControl.module.css';
 
 const BuildControl = props => (
   <div className={styles.BuildControl}>
-    <div className={styles.Label}>{props.label}</div>
-    <button 
-    className={styles.Less} 
-    onClick={props.removeIngredient}
-    disabled={props.disabledInfo}>Less</button>
-    <button 
-    className={styles.More} 
-    onClick={props.addIngredient}>More</button>
+    <label className={styles.Label}>{props.label}</label>
+    <Checkbox onClick={props.toggleIngredient}/>
   </div>
 );
 
