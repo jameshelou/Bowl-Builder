@@ -30,25 +30,18 @@ class BowlBuilder extends Component {
        .catch(error => this.setState({error: error}));
   }
 
-  setNumCheckedHandler = e => {
-    const step = e.target.name
+  buildControlOnChangeHandler = (type, e) => {
+    // update stepsChecked
+    const step = e.target.name;
     e.target.checked
       ? this.setState(prevState => prevState.stepsChecked[step] += 1)
       : this.setState(prevState => prevState.stepsChecked[step] -= 1)
+
+    // update ingredients for order
+    this.updateIngredientHandler(type);
   }
 
-  updatePurchasable = () => {
-    const {step1, step2, step3} = this.state.stepsChecked;
-
-    // business logic - is valid order?
-    if (step1 === 1 && step2 === 1 && (step3 >= 3 && step3 <= 5)) {
-      this.setState({ purchasable: true });
-    } else {
-      this.setState({ purchasable: false });
-    }
-  }
-
-  toggleIngredientHandler = ingredient => {
+  updateIngredientHandler = ingredient => {
     const updatedIngredients = {
       ...this.state.ingredients
     }
@@ -74,6 +67,17 @@ class BowlBuilder extends Component {
       updatedIngredients[ingredient] = updatedIngredients[ingredient] - 1;
       const updatedPrice = this.state.totalPrice - INGREDIENT_PRICES[ingredient];
       this.setState({ ingredients: updatedIngredients, totalPrice: updatedPrice }, () => this.updatePurchasable());
+    }
+  }
+
+    updatePurchasable = () => {
+    const {step1, step2, step3} = this.state.stepsChecked;
+
+    // business logic - is valid order?
+    if (step1 === 1 && step2 === 1 && (step3 >= 3 && step3 <= 5)) {
+      this.setState({ purchasable: true });
+    } else {
+      this.setState({ purchasable: false });
     }
   }
 
@@ -123,8 +127,7 @@ class BowlBuilder extends Component {
           <Bowl ingredients={this.state.ingredients} />
 
           <BuildControls
-            onChange={this.setNumCheckedHandler}
-            toggleIngredient={this.toggleIngredientHandler}
+            onChange={this.buildControlOnChangeHandler}
             disabledInfo={disabledInfo}
             totalPrice={this.state.totalPrice}
             purchasable={this.state.purchasable}

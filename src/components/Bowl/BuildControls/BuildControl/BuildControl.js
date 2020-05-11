@@ -7,7 +7,6 @@ const BuildControl = props => (
     <label className={styles.Label}>{props.label}</label>
     <Checkbox
       name={props.name}
-      onClick={props.toggleIngredient} 
       onChange={props.onChange}/>
   </div>
 );

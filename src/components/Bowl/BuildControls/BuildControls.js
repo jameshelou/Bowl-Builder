@@ -9,21 +9,18 @@ const BuildControls = props => {
         title="STEP 1 CHOOSE A BASE"
         name="step1"
         onChange={props.onChange}
-        toggleIngredient={props.toggleIngredient}
         disabledInfo={props.disabledInfo}/>
 
       <BuildStep 
         title="STEP 2 CHOOSE A PROTEIN" 
         name="step2"
         onChange={props.onChange}
-        toggleIngredient={props.toggleIngredient}
         disabledInfo={props.disabledInfo}/>
 
       <BuildStep 
         title="STEP 3 ADD SOME VEG (5)"
         name="step3"
         onChange={props.onChange}
-        toggleIngredient={props.toggleIngredient}
         disabledInfo={props.disabledInfo}/>
       
       <p className={styles.Price}>${props.totalPrice.toFixed(2)}</p>

@@ -12,8 +12,7 @@ const BuildStep = props => {
           key={c.label}
           label={c.label}
           name={props.name}
-          onChange={props.onChange}
-          toggleIngredient={() => props.toggleIngredient(c.type)}
+          onChange={e => props.onChange(c.type, e)}
           disabledInfo={props.disabledInfo[c.type]} />
       )}
     </div>
