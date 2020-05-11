@@ -38,16 +38,14 @@ class BowlBuilder extends Component {
   }
 
   updatePurchasable = () => {
-    const ingredients = {
-      ...this.state.ingredients
+    const {step1, step2, step3} = this.state.stepsChecked;
+
+    // business logic - is valid order?
+    if (step1 === 1 && step2 === 1 && (step3 >= 3 && step3 <= 5)) {
+      this.setState({ purchasable: true });
+    } else {
+      this.setState({ purchasable: false });
     }
-    for (let key in ingredients) {
-      if (ingredients[key] !== 0) {
-        this.setState({ purchasable: true });
-        return;
-      }
-    }
-    this.setState({ purchasable: false });
   }
 
   toggleIngredientHandler = ingredient => {
