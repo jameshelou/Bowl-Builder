@@ -5,7 +5,10 @@ import styles from './BuildControl.module.css';
 const BuildControl = props => (
   <div className={styles.BuildControl}>
     <label className={styles.Label}>{props.label}</label>
-    <Checkbox onClick={props.toggleIngredient}/>
+    <Checkbox
+      name={props.name}
+      onClick={props.toggleIngredient} 
+      onChange={props.onChange}/>
   </div>
 );
 

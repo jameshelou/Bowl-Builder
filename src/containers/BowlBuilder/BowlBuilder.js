@@ -13,6 +13,11 @@ class BowlBuilder extends Component {
   state = {
     ingredients: null,
     totalPrice: 0,
+    stepsChecked: {
+      step1: 0,
+      step2: 0,
+      step3: 0
+    },
     purchasable: false,
     purchasing: false,
     loading: false,
@@ -21,8 +26,15 @@ class BowlBuilder extends Component {
 
   componentDidMount() {
     axios.get('https://react-bowl-builder.firebaseio.com/ingredients.json')
-       .then(response => this.setState({ingredients: response.data}))
+       .then(response => this.setState({ingredients: response.data.step1}))
        .catch(error => this.setState({error: error}));
+  }
+
+  setNumCheckedHandler = e => {
+    const step = e.target.name
+    e.target.checked
+      ? this.setState(prevState => prevState.stepsChecked[step] += 1)
+      : this.setState(prevState => prevState.stepsChecked[step] -= 1)
   }
 
   updatePurchasable = () => {
@@ -113,6 +125,7 @@ class BowlBuilder extends Component {
           <Bowl ingredients={this.state.ingredients} />
 
           <BuildControls
+            onChange={this.setNumCheckedHandler}
             toggleIngredient={this.toggleIngredientHandler}
             disabledInfo={disabledInfo}
             totalPrice={this.state.totalPrice}

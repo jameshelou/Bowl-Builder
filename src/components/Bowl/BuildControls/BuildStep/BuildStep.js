@@ -11,6 +11,8 @@ const BuildStep = props => {
         <BuildControl
           key={c.label}
           label={c.label}
+          name={props.name}
+          onChange={props.onChange}
           toggleIngredient={() => props.toggleIngredient(c.type)}
           disabledInfo={props.disabledInfo[c.type]} />
       )}
